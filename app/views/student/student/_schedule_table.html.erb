@@ -1,0 +1,46 @@
+
+<h3 class="text-center">Schedule for <%= @teacher.name%></h3>
+<div class="table-responsive">
+  <table class="table table-bordered table-hover table-striped">
+    <thead>
+    <tr>
+      <td></td>
+      <%
+         shown_dates = Array.new
+      %>
+      <!-- column headers -->
+      <% (0..2).each do |i| %>
+          <%
+             d = (Date.today + i.day)
+             shown_dates.push(d.strftime('%Y%m%d'))
+          %>
+          <th><%= d.strftime(EslBookingSystem::Application::DISPLAY_DATE_FORMAT) %></th>
+      <% end %>
+    </tr>
+    </thead>
+    <tbody>
+    <% (0..23).each do |hour| %>
+        <% [['00','30'],['30','00']].each_with_index do |minute,index| %>
+            <tr>
+              <th><%= hour.to_s+':'+minute[0].to_s+ ' - ' + (hour+index).to_s+':'+minute[1].to_s %></th>
+              <% (0..2).each do |i| %>
+                  <% slot_key = shown_dates[i]+('%02d' % hour) + minute[0].to_s %>
+                  <%= content_tag :td,  {id: 'slot'+slot_key}  do %>
+                    <% if @hashed_schedules.has_key?(slot_key) %>
+                      <%
+                        schedule = @hashed_schedules[slot_key]
+                      %>
+                      <% if schedule.schedule_status == 1 %>
+                        <span>booked</span>
+                      <% else %>
+                        <%= link_to 'Open',student_student_book_lesson_path(schedule), method: :post, class:'btn btn-default' %>
+                      <% end %>
+                    <% end %>
+                  <% end %>
+              <% end %>
+            </tr>
+        <% end %>
+    <% end %>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,56 @@
+<%= form_tag teachers_path ,method: :get, :id=>'search-form', class:'form-horizontal'  do %>
+    <div class="form-group form-inline">
+      <%= label_tag :'teacher-search', class:'col-sm-2' do %>
+          Teacher Name:
+      <% end %>
+      <div class="input-group col-sm-6">
+        <input type="text" class="form-control search-param" placeholder="Search for..." id="teacher-search" name="name" value="<%=params[:name] %>">
+              <span class="input-group-btn">
+                    <button class="btn btn-default" id="btn-search">
+                      <i class="fa fa-search"></i>
+                    </button>
+              </span>
+      </div>
+    </div>
+
+    <div class="form-group form-inline">
+      <%= label_tag :cbGender, class:'col-sm-2' do %>
+          Gender:
+      <% end %>
+      <div class="col-sm4">
+        <label class="checkbox-inline">
+          <%= check_box_tag 'gender',Gender::MALE[0],params[:gender].present? && params[:gender].include?(Gender::MALE[0].to_s),id:'cbMale',name:'gender[]',class:'change-candidate' %><%= Gender::MALE[1] %>
+        </label>
+        <label class="checkbox-inline">
+          <%= check_box_tag 'gender',Gender::FEMALE[0],params[:gender].present? && params[:gender].include?(Gender::FEMALE[0].to_s),id:'cbFemale',name:'gender[]',class:'change-candidate' %><%= Gender::FEMALE[1] %>
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group form-inline">
+      <%= label_tag :'sel-country', class:'col-sm-2' do %>
+          Nationality:
+      <% end %>
+      <div class="col-sm-4">
+        <%= country_select('nationality', '', { include_blank: 'Nationality', selected: (params[:nationality].present? ? params[:nationality][0] : nil) }, { class: 'form-control change-candidate', id:'sel-country'}) %>
+      </div>
+    </div>
+
+    <div class="form-group form-inline">
+      <%= label_tag :datepicker, class:'col-sm-2' do %>
+          Availability:
+      <% end %>
+      <div class="input-daterange input-group col-sm-6" id="datepicker">
+        <%= text_field_tag 'from',params[:from],class:'form-control dp-date change-candidate' %>
+        <span class="input-group-addon">to</span>
+        <%= text_field_tag 'to',params[:to],class:'form-control dp-date change-candidate' %>
+      </div>
+      <label class="checkbox-inline">
+        <%= check_box_tag 'availability',1,params[:availability].to_i==1,id:'cbFilter',name:'availability',class:'change-candidate' %>Apply Schedule Filter
+      </label>
+
+
+    </div>
+
+
+<% end %>

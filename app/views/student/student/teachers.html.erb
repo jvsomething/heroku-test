@@ -1,0 +1,26 @@
+<%= stylesheet_link_tag 'student/teachers', media: 'all' %>
+<%= stylesheet_link_tag 'student/student', media: 'all' %>
+<%= javascript_include_tag 'student/teachers' %>
+<%= javascript_include_tag '/plugins/bootstrap-datepicker.min' %>
+<%= stylesheet_link_tag '/plugins/bootstrap-datepicker.min' %>
+
+<% content_for :head_title do %>
+    Teachers
+<% end %>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <%= render :partial => 'search_form' %>
+  </div>
+  <div class="panel-body">
+    <%= render :partial => 'teacher_list' %>
+    <div id="schedule-div">
+      <h4>Select Teacher for their Schedules.</h4>
+    </div>
+  </div>
+
+  <div class="panel-footer">
+
+  </div>
+</div>
+<%= hidden_field_tag :schedule_path , student_student_get_teacher_schedule_path %>

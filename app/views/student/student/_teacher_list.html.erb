@@ -1,0 +1,18 @@
+<div class="row">
+  <% @teachers.each do |teacher| %>
+      <div class="col-sm-3 col-lg-3 col-md-3">
+        <%= content_tag :div, class:'thumbnail teacher-item',:data=>{id:teacher.id} do %>
+            <%= image_tag 'http://placehold.it/320x150' %>
+            <div class="caption">
+              <h4>
+                <%= teacher.name %>
+              </h4>
+              <small><%= Gender::parse_gender(teacher.gender)[1] %></small> - <small><%= ISO3166::Country[teacher.nationality].name %></small>
+            </div>
+        <% end %>
+      </div>
+  <% end %>
+</div>
+<div id="pagination-div" class="text-center">
+  <%= paginate @teachers %>
+</div>

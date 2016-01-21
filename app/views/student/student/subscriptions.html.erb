@@ -1,0 +1,35 @@
+<%= stylesheet_link_tag 'student/subscriptions', media: 'all' %>
+<%= stylesheet_link_tag 'student/student', media: 'all' %>
+<%= javascript_include_tag 'student/subscriptions' %>
+
+<% content_for :head_title do %>
+    Subscriptions
+<% end %>
+
+
+<div class="table-responsive">
+  <table class="table table-bordered table-hover table-striped">
+    <thead>
+    <tr>
+      <td>Name</td>
+      <td>Max Lessons per day</td>
+      <td>Subscribed</td>
+    </tr>
+    </thead>
+    <tbody>
+    <% @subscriptions.each do |subscription| %>
+        <tr>
+          <td><%= subscription.name %></td>
+          <td><%= subscription.max_daily %></td>
+          <td>
+            <% if subscription.id == current_student.subscription_id %>
+                Subscribed
+            <% else %>
+                <%= link_to 'Subscribe To Plan', student_student_subscribe_path(subscription), method: :post,class:'btn btn-default' %>
+            <% end %>
+          </td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

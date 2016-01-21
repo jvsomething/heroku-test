@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  schedule_id: 
+  student_id: 
+  subscription_id: 
+  status: 1
+  date: 2016-01-20
+
+two:
+  schedule_id: 
+  student_id: 
+  subscription_id: 
+  status: 1
+  date: 2016-01-20

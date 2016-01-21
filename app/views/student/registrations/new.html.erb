@@ -1,0 +1,66 @@
+<%= stylesheet_link_tag 'common/sign_form' %>
+<div class="row text-center">
+  <%= link_to root_path, class:'navbar-brand center-div' do %>
+      <h1>ESL Booking System</h1>
+  <% end %>
+</div>
+
+<% flash.each do |message_type, message| %>
+    <div class="alert alert-<%= message_type %>  center-div"><%= message %>
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    </div>
+<% end %>
+
+<div class="panel panel-default center-div">
+  <div class="panel-heading">
+    <h3 class="panel-title">Create account</h3>
+  </div>
+  <div class="panel-body">
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+
+
+        <div class="form-group">
+          <%= label_tag :name %>
+          <!-- %= text_field_tag :name,'', autofocus: true,class:'form-control' % -->
+          <%= f.text_field :name, autofocus: true,class:'form-control' %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :email %>
+          <%= f.email_field :email, class:'form-control' %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :password %>
+          <% if @minimum_password_length %>
+              <em>(<%= @minimum_password_length %> characters minimum)</em>
+          <% end %><br />
+          <%= f.password_field :password, autocomplete: 'off',class:'form-control' %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :password_confirmation %><br />
+          <%= f.password_field :password_confirmation, autocomplete: 'off',class:'form-control' %>
+        </div>
+
+        <div class="actions">
+          <%= f.submit 'Create your account',class:'form-control btn btn-custom' %>
+        </div>
+    <% end %>
+    <div class="form-divider"></div>
+    <div>
+      Already have an account? <%= link_to 'Log in', new_session_path(resource_name) %>
+    </div>
+    <!-- %= render 'customer_accounts/shared/links' %-->
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+

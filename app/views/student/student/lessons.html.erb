@@ -1,0 +1,31 @@
+<%= stylesheet_link_tag 'student/lessons', media: 'all' %>
+<%= stylesheet_link_tag 'student/student', media: 'all' %>
+<%= javascript_include_tag 'student/lessons' %>
+
+<% content_for :head_title do %>
+    Lessons
+<% end %>
+
+<% if @lessons.nil? || @lessons.length == 0%>
+    <h4>You currently have no available lessons.</h4>
+<% end %>
+
+<% @lessons.each do |lesson| %>
+    <% schedule = lesson.schedule %>
+    <div class="row">
+      <div class="col-md-3">
+        <%= content_tag :div, class:'thumbnail teacher-item' do %>
+            <%= image_tag 'http://placehold.it/320x150' %>
+            <div class="caption">
+              <h4>
+                <%= schedule.teacher.name %>
+              </h4>
+            </div>
+        <% end %>
+      </div>
+      <div class="col-md-8">
+            <h3><%= schedule.start_time.strftime(EslBookingSystem::Application::DISPLAY_DATE_FORMAT) %> - <small>(<%= schedule.start_time.strftime('%l:%M%p') %> - <%= schedule.end_time.strftime('%l:%M%p') %>)</small></h3>
+            <%= link_to 'Cancel Lesson',student_student_cancel_lesson_path(lesson),method: :delete, class:'btn btn-primary' %>
+      </div>
+    </div>
+<% end %>
