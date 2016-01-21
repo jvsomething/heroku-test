@@ -10,7 +10,38 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
+//= require jquery.min.js
 //= require jquery_ujs
-//= require turbolinks
-//= require_tree .
+//=  require bootstrap
+
+
+$(document).ready(function(){
+    var notification = $('#notice').text().trim();
+    if(notification.length > 0){
+        $.notify({
+            // options
+            icon: 'fa fa-bolt',
+            //title: 'Bootstrap notify',
+            message: notification
+        },{
+            // settings
+            element: 'body',
+            type: "success",
+            placement: {
+                from: "top",
+                align: "center"
+            },
+            offset: 20,
+            spacing: 10,
+            z_index: 1031,
+            delay: 2000,
+            timer: 1000,
+            mouse_over: null,
+            animate: {
+                enter: 'animated fadeInDown',
+                exit: 'animated fadeOutUp'
+            },
+            icon_type: 'class'
+        });
+    }
+});

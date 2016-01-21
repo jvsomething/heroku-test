@@ -6,8 +6,14 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module HerokuTest
+module EslBookingSystem
   class Application < Rails::Application
+
+    DISPLAY_DATE_FORMAT = '%B %d, %Y'
+
+    # A devise setting to prevent Heroku from accessing the DB or load models when precompiling the assets.
+    config.assets.initialize_on_precompile = false
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

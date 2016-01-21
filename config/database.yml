@@ -10,23 +10,30 @@
 #   http://dev.mysql.com/doc/refman/5.0/en/old-client.html
 #
 default: &default
-  adapter: mysql2
-  encoding: utf8
+#  #mysql setup
+#  adapter: mysql2
+#  encoding: utf8
+#  pool: 5
+#  username: root
+#  password: password
+#  host: localhost
+
+  adapter: postgresql
+  encoding: unicode
   pool: 5
-  username: root
   password: password
-  host: localhost
+  username: postgres
 
 development:
   <<: *default
-  database: HerokuTest_development
+  database: esl_development
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: HerokuTest_test
+  database: esl_test
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -49,6 +56,6 @@ test:
 #
 production:
   <<: *default
-  database: HerokuTest_production
-  username: HerokuTest
-  password: <%= ENV['HEROKUTEST_DATABASE_PASSWORD'] %>
+  database: esl
+  username: esl-booking-system
+  password: <%= ENV['ESL_DATABASE_PASSWORD'] %>

@@ -1,14 +1,93 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>HerokuTest</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <title>EslBookingSystem</title>
+  <%= javascript_include_tag 'application' %>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+
+  <!-- Plugins -->
+  <%= javascript_include_tag '/plugins/bootstrap-notify.min' %>
+  <%= stylesheet_link_tag '/plugins/animate.min' %>
+
   <%= csrf_meta_tags %>
 </head>
 <body>
+<p id="notice"><%= notice %></p>
+<!-- Navigation -->
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">ESL Booking System</a>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li>
+          <%= link_to 'Lessons', lessons_path %>
+        </li>
+        <li>
+          <%= link_to 'Teachers', teachers_path %>
+        </li>
+        <li>
+          <%= link_to 'Subscriptions', subscriptions_path %>
+        </li>
+      </ul>
 
-<%= yield %>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <%= link_to 'Hello '+ current_student.name+ '!', 'javascript:;' %>
+
+        </li>
+        <li>
+          <%= link_to 'Log out', destroy_student_session_path, method: :delete %>
+        </li>
+      </ul>
+
+    </div>
+
+
+
+
+    <!-- /.navbar-collapse -->
+  </div>
+  <!-- /.container -->
+</nav>
+
+<!-- Page Content -->
+<div class="container">
+
+  <!-- Page Heading -->
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 class="page-header">
+        <%= yield :head_title %>
+      </h1>
+    </div>
+  </div>
+  <!-- /.row -->
+
+  <%= yield %>
+
+  <!-- Footer -->
+  <footer>
+    <div class="row">
+      <div class="col-lg-12">
+        <p>Copyright &copy; Your Website 2014</p>
+      </div>
+    </div>
+    <!-- /.row -->
+  </footer>
+
+</div>
+<!-- /.container -->
+
 
 </body>
 </html>
