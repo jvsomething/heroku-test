@@ -57,7 +57,7 @@ class Student::StudentController < ApplicationController
   def book_lesson
 
     #validate that student has an active subscription
-    subscription = Subscription.where(:id => current_student.subscription_id).first
+    subscription = Subscription.joins('inner join students on students.subscription_id = subscriptions.id').where('students.id = ?',current_student.id).first
     if subscription.nil?
       redirect_to subscriptions_path, :notice => 'You don\'t have an active subscription.' and return
     end
@@ -121,9 +121,11 @@ class Student::StudentController < ApplicationController
 
   def subscribe
     student = Student.where(:id => current_student.id).first
-    student.update(:subscription_id => params[:id].to_i)
+    unless student.update!(:subscription_id => params[:id].to_i)
+      redirect_to subscriptions_path, :notice => 'Failed to subscribe.' and return
+    end
     current_student.subscription_id = params[:id].to_i
-    redirect_to subscriptions_path, :notice => 'Successfully Subscribed to plan'
+    redirect_to teachers_path, :notice => 'Successfully Subscribed to plan. You may not book lessons!'
   end
 
   private

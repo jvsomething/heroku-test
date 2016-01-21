@@ -9,6 +9,8 @@ class Student < ActiveRecord::Base
   validates :name, presence: true
   validates :email, presence: true
   validates :password, confirmation: true
-  validates :password_confirmation, presence: true
+  validates :password_confirmation, presence: true, on: :create
+
+  has_one :subscription
 
 end
