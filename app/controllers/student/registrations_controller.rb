@@ -10,9 +10,12 @@ class Student::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    super
+    if !resource.errors.empty?
+      flash[:danger] = resource.errors.full_messages[0]
+    end
+  end
 
   # GET /resource/edit
   # def edit
