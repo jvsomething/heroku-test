@@ -1,6 +1,6 @@
 class Student::StudentController < ApplicationController
 
-  before_filter :student_authorized?
+  before_action :authenticate_student!
 
   def subscriptions
     @subscriptions = Subscription.all
@@ -122,6 +122,7 @@ class Student::StudentController < ApplicationController
   def subscribe
     student = Student.where(:id => current_student.id).first
     student.update(:subscription_id => params[:id].to_i)
+    current_student.subscription_id = params[:id].to_i
     redirect_to subscriptions_path, :notice => 'Successfully Subscribed to plan'
   end
 

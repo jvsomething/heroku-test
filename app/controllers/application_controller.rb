@@ -8,4 +8,13 @@ class ApplicationController < ActionController::Base
     new_student_session_path
   end
 
+  def after_sign_in_path_for(resource)
+    if current_student.subscription_id.nil?
+      flash[:notice] = 'You haven\'t subscribed to a plan yet. Please choose a subscription.'
+      subscriptions_path
+    else
+      lessons_path
+    end
+  end
+
 end
