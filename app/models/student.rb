@@ -6,4 +6,9 @@ class Student < ActiveRecord::Base
 
   devise :database_authenticatable, :registerable, :validatable
 
+  validates :name, presence: true
+  validates :email, presence: true
+  validates :password, confirmation: true
+  validates :password_confirmation, presence: true
+
 end

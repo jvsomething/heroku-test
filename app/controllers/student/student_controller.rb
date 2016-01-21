@@ -16,7 +16,7 @@ class Student::StudentController < ApplicationController
 
     @teachers = Teacher.page(page_num).per(8)
 
-    @teachers = @teachers.where('name LIKE :search', search: "%#{keyword}%") if keyword.to_s.strip.length > 0
+    @teachers = @teachers.where('lower(name) LIKE :search', search: "%#{keyword.downcase}%") if keyword.to_s.strip.length > 0
     if params[:gender].present?
       @teachers = @teachers.where('gender IN (?)',params[:gender])
     end
